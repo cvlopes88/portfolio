@@ -30,6 +30,13 @@ function App() {
 
   // Intersection Observer for scroll animations
   useEffect(() => {
+    if (!("IntersectionObserver" in window)) {
+      document
+        .querySelectorAll(".lm-animate")
+        .forEach((element) => element.classList.add("lm-animate-in"));
+      return undefined;
+    }
+
     const observerOptions = {
       threshold: 0.1,
       rootMargin: "0px 0px -100px 0px",
@@ -51,6 +58,9 @@ function App() {
 
   return (
     <div className="lm-root">
+      <a className="lm-skip-link" href="#main-content">
+        Skip to main content
+      </a>
       {/* Animated Background Elements */}
       <div className="lm-bg-effects">
         <div className="lm-gradient-orb lm-orb-1"></div>
@@ -66,7 +76,7 @@ function App() {
             Luis Mendes
             <span className="lm-logo-bracket">{" />"}</span>
           </div>
-          <nav className="lm-nav">
+          <nav className="lm-nav" aria-label="Primary navigation">
             <a
               href="#about"
               className={activeSection === "about" ? "lm-nav-active" : ""}
@@ -107,40 +117,34 @@ function App() {
         </div>
       </header>
 
-      <main>
+      <main id="main-content">
         {/* HERO */}
         <section className="lm-hero">
           <div className="lm-container lm-hero-inner">
             <div className="lm-hero-text">
               <p className="lm-eyebrow lm-animate">
-                <span className="lm-eyebrow-icon">🔒</span>
                 Network Engineering • Cybersecurity
               </p>
               <h1 className="lm-animate">
                 Hey, I'm <span className="lm-highlight">Luis Mendes</span>
               </h1>
               <p className="lm-hero-subtitle lm-animate">
-                Network Engineer focused on designing secure, resilient
-                infrastructure for global environments. I love turning messy,
-                fragile networks into scalable architectures with strong
-                security controls and clear visibility.
+                Network Engineer designing secure, resilient infrastructure for
+                global environments—combining strong security controls,
+                operational visibility, and pragmatic engineering.
               </p>
 
               <div className="lm-hero-tags lm-animate">
                 <span className="lm-tag">
-                  <span className="lm-tag-icon">🏗️</span>
                   Network Architecture
                 </span>
                 <span className="lm-tag">
-                  <span className="lm-tag-icon">🛡️</span>
                   Firewall &amp; SD-WAN
                 </span>
                 <span className="lm-tag">
-                  <span className="lm-tag-icon">🔐</span>
                   Zero Trust &amp; Segmentation
                 </span>
                 <span className="lm-tag">
-                  <span className="lm-tag-icon">☁️</span>
                   Cloud &amp; Hybrid
                 </span>
               </div>
@@ -173,7 +177,6 @@ function App() {
             <div className="lm-hero-card lm-animate">
               <div className="lm-card-glow"></div>
               <h2>
-                <span className="lm-card-icon">🎯</span>
                 Current Focus
               </h2>
               <ul>
@@ -207,7 +210,7 @@ function App() {
             </div>
             <div className="lm-about-highlights">
               <div className="lm-stat-card lm-animate">
-                <span className="lm-stat-number">4+ yrs</span>
+                <span className="lm-stat-number">Since 2019</span>
                 <span className="lm-stat-label">at Repligen</span>
               </div>
               <div className="lm-stat-card lm-animate">
@@ -233,7 +236,7 @@ function App() {
 
             <div className="lm-skills-grid">
               <div className="lm-skill-card lm-animate">
-                <div className="lm-skill-icon">🌐</div>
+                <div className="lm-skill-icon" aria-hidden="true">NET</div>
                 <h3>Network Engineering</h3>
                 <ul>
                   <li>LAN / WLAN design &amp; troubleshooting</li>
@@ -243,7 +246,7 @@ function App() {
                 </ul>
               </div>
               <div className="lm-skill-card lm-animate">
-                <div className="lm-skill-icon">🔒</div>
+                <div className="lm-skill-icon" aria-hidden="true">SEC</div>
                 <h3>Security &amp; Segmentation</h3>
                 <ul>
                   <li>Firewall administration &amp; hardening</li>
@@ -253,13 +256,13 @@ function App() {
                 </ul>
               </div>
               <div className="lm-skill-card lm-animate">
-                <div className="lm-skill-icon">🛠️</div>
+                <div className="lm-skill-icon" aria-hidden="true">OPS</div>
                 <h3>Tools &amp; Platforms</h3>
                 <ul>
                   <li>Fortinet (FortiGate, FortiManager, FortiAnalyzer)</li>
                   <li>Cisco switching &amp; wireless</li>
                   <li>Armis &amp; SNMP monitoring</li>
-                  <li>Git, scripting &amp; automation basics</li>
+                  <li>Git, scripting &amp; network automation</li>
                 </ul>
               </div>
             </div>
@@ -276,7 +279,7 @@ function App() {
 
             <div className="lm-projects-grid">
               <article className="lm-project-card lm-animate">
-                <div className="lm-project-icon">🌐</div>
+                <div className="lm-project-icon" aria-hidden="true">01</div>
                 <h3>Global SD-WAN &amp; Firewall Modernization</h3>
                 <p>
                   Led network changes for multiple global sites, standardizing
@@ -292,7 +295,7 @@ function App() {
               </article>
 
               <article className="lm-project-card lm-animate">
-                <div className="lm-project-icon">🔬</div>
+                <div className="lm-project-icon" aria-hidden="true">02</div>
                 <h3>Lab &amp; OT Network Segmentation</h3>
                 <p>
                   Designed and deployed VLAN standards to separate office, lab,
@@ -308,7 +311,7 @@ function App() {
               </article>
 
               <article className="lm-project-card lm-animate">
-                <div className="lm-project-icon">📊</div>
+                <div className="lm-project-icon" aria-hidden="true">03</div>
                 <h3>FortiManager &amp; FortiAnalyzer Rollout</h3>
                 <p>
                   Helped implement FortiManager to centralize firewall
@@ -390,7 +393,7 @@ function App() {
             <h2 className="lm-animate">Certifications &amp; Learning</h2>
             <div className="lm-certs-grid">
               <div className="lm-cert-card lm-animate">
-                <div className="lm-cert-icon">🎓</div>
+                <div className="lm-cert-icon" aria-hidden="true">CCNA</div>
                 <h3>CCNA</h3>
                 <p>
                   Cisco Certified Network Associate. Validates routing,
@@ -398,7 +401,7 @@ function App() {
                 </p>
               </div>
               <div className="lm-cert-card lm-animate">
-                <div className="lm-cert-icon">☁️</div>
+                <div className="lm-cert-icon" aria-hidden="true">LEARN</div>
                 <h3>Cybersecurity &amp; Cloud</h3>
                 <p>
                   Ongoing study in cybersecurity frameworks, cloud networking,
@@ -421,19 +424,19 @@ function App() {
               </p>
               <ul className="lm-contact-list">
                 <li>
-                  <span className="lm-contact-label">📧 Email</span>
+                  <span className="lm-contact-label">Email</span>
                   <a href="mailto:cvlopes88@gmail.com">cvlopes88@gmail.com</a>
                 </li>
                 <li>
-                  <span className="lm-contact-label">📍 Location</span>
+                  <span className="lm-contact-label">Location</span>
                   Boston, MA (USA)
                 </li>
                 <li>
-                  <span className="lm-contact-label">💼 LinkedIn</span>
+                  <span className="lm-contact-label">LinkedIn</span>
                   <a
                     href="https://www.linkedin.com/in/luis-mendes-ab156265/"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noreferrer noopener"
                   >
                     linkedin.com/in/luis-mendes-ab156265
                   </a>
@@ -441,52 +444,39 @@ function App() {
               </ul>
             </div>
 
-            <form
-              className="lm-contact-form lm-animate"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <div className="lm-field">
-                <label htmlFor="name">Name</label>
-                <input id="name" type="text" placeholder="Your name" />
-              </div>
-              <div className="lm-field">
-                <label htmlFor="email">Email</label>
-                <input id="email" type="email" placeholder="you@example.com" />
-              </div>
-              <div className="lm-field">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  rows="4"
-                  placeholder="What would you like to talk about?"
-                />
-              </div>
-              <button
-                type="submit"
-                className="lm-btn lm-btn-primary lm-btn-full"
-              >
-                <span>Send Message</span>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  className="lm-btn-icon"
-                >
-                  <path
-                    d="M14 2L7 9M14 2L9.5 14L7 9M14 2L2 6.5L7 9"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-              <p className="lm-form-note">
-                This form is a front-end demo. You can hook it up to your
-                preferred backend or email service.
+            <aside className="lm-contact-panel lm-animate" aria-label="Contact options">
+              <p className="lm-contact-kicker">Start a conversation</p>
+              <h3>Network engineering, security, and infrastructure</h3>
+              <p>
+                The most reliable way to reach me is by email. You can also view
+                my professional background and public work.
               </p>
-            </form>
+              <div className="lm-contact-actions">
+                <a
+                  className="lm-btn lm-btn-primary"
+                  href="mailto:cvlopes88@gmail.com"
+                  aria-label="Email Luis"
+                >
+                  Email Luis
+                </a>
+                <a
+                  className="lm-btn lm-btn-ghost"
+                  href="https://www.linkedin.com/in/luis-mendes-ab156265/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  className="lm-btn lm-btn-ghost"
+                  href="https://github.com/cvlopes88"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  GitHub
+                </a>
+              </div>
+            </aside>
           </div>
         </section>
 
