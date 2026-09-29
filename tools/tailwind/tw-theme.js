@@ -2,7 +2,7 @@ module.exports = {
     theme: {
       extend: {
         colors: {
-          base: 'var(--bg)', panel: 'var(--panel)', panel2: 'var(--panel2)',
+          canvas: 'var(--bg)', panel: 'var(--panel)', panel2: 'var(--panel2)',
           line: 'var(--line)', ink: 'var(--ink)', muted: 'var(--muted)', faint: 'var(--faint)',
           accent: 'var(--accent)', acc: 'var(--accent-text)', onacc: 'var(--on-accent)',
           cy: 'var(--cyan)', amber: 'var(--amber)'
